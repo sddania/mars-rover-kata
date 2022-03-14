@@ -17,3 +17,6 @@ import { pipe } from 'fp-ts/function'
  */
 export const greet = (name: string): string =>
   pipe(`Hello`, (x) => `${x}, ${name}!`)
+
+
+// https://dev.to/gcanti/getting-started-with-fp-ts-reader-1ie5
