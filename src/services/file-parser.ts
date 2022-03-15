@@ -1,20 +1,21 @@
 // import * as t from 'io-ts'
-// import {Size} from "../models/mars";
+// import {GridSize} from "../models/mars";
 // import {either} from "fp-ts";
 //
 // const canBeSplit = (input: string, separator: RegExp): input is string => (input.match(separator)?.length ?? []) > 0
 // const stringToArrayFromSeparatorCodec = (separator: RegExp) => new t.Type<string, string[], string>(
 //     'stringToArrayFromSeparator',
 //     t.string.is,
-//     // `t.success` and `t.failure` are helpers used to build `Either` instances
 //     (input, context) =>
-//         (canBeSplit(input, separator) ? t.success(input) : t.failure(input, context, "The input must be separated by the separator char")),
+//         (canBeSplit(input, separator) ?
+//             t.success(input) :
+//             t.failure(input, context, "The input must be separated by the separator char")),
 //     // `A` and `O` are the same, so `encode` is just the identity function
 //     (input: string): string[] => input.split(separator)
 // )
 //
-// const stringToArrayFromReturnCodec = stringToArrayFromSeparatorCodec(/\r?\n/)
-// const stringToArrayFromSpaceCodec = stringToArrayFromSeparatorCodec(/\s/)
+// export const stringToArrayFromReturnCodec = stringToArrayFromSeparatorCodec(/\r?\n/)
+// export const stringToArrayFromSpaceCodec = stringToArrayFromSeparatorCodec(/\s/)
 //
 // const firstRowMustBeEqualToGridCodec = new t.Type<string[], string[], string[]>(
 //     "firstRowMustBeEqualToGrid",
@@ -24,32 +25,42 @@
 //     t.identity
 // )
 //
+//
 // const secondRowCodec = new t.Type<string[], string[], string[]>(
 //     "secondRowCodec",
 //     t.array(t.string).is,
-//     (input, context) =>
-//         (input[1].startsWith("Size") ? t.success(input) : t.failure(input, context, "second row must start with 'Size'")),
+//     (input, context) => {
+//         const index = input.findIndex(i => i.startsWith("Size"));
+//         if (index === 1) {
+//             const row = stringToArrayFromSpaceCodec.encode(input[index] ?? "");
+//             if (row.length === 3) {
+//                 const isFirstNumber = numberMajorOfOneCodec.validate(row[1] ?? "0", context);
+//                 if (!isFirstNumber) {
+//                     return t.failure(input, context, "first part of 'Size' is malformed")
+//                 }
+//                 const isSecondNumber = numberMajorOfOneCodec.validate(row[2] ?? "0", context)
+//                 if (!isSecondNumber) {
+//                     return t.failure(input, context, "second part of 'Size' is malformed")
+//                 }
+//                 return t.success(input)
+//             }
+//             return t.failure(input, context, "The row 'Size' is malformed")
+//         }
+//         return t.failure(input, context, "second row must start with 'Size'")
+//     },
 //     t.identity
 // )
 //
 //
-// const sizeRowCodec = new t.Type<string, Size, string>(
-//     "sizeRowCodec",
-//     t.string.is,
-//     (input, context) =>
-//         either.chain(stringToArrayFromSpaceCodec.validate(input, context), (s) => {
-//             s[0] ===
-//             (? t.success(input) : t.failure(input, context, "second row must start with 'Size'")),
-//         }),
-//     t.identity
-// )
+// firstRowMustBeEqualToGridCodec.pipe(secondRowCodec)
 //
-// const NumberCodec = new t.Type<number, string, string>(
+//
+// export const numberMajorOfOneCodec = new t.Type<number, string, string>(
 //     'NumberCodec',
 //     t.number.is,
 //     (s, c) => {
 //         const n = parseFloat(s)
-//         return isNaN(n) ? t.failure(s, c) : t.success(n)
+//         return !isNaN(n) && n > 0 ? t.success(n) : t.failure(s, c)
 //     },
 //     String
 // )

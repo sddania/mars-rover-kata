@@ -27,5 +27,5 @@ test("cannot get example that doesn't exist", async () => {
         )
     );
     const actual = await execution();
-    expect(actual).toContain("Error: ENOENT: no such file or directory");
+    expect(actual).toContain("Error getting file: Error: ENOENT: no such file or directory");
 })

@@ -1,8 +1,8 @@
 import {Coordinates} from "./rover";
 
-export type Size = Coordinates;
+export type GridSize = Coordinates;
 export type Obstacles = Coordinates[];
 export type Mars = {
-    gridDimension: Size,
+    gridSize: GridSize,
     obstacles: Obstacles
 }

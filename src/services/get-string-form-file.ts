@@ -1,7 +1,7 @@
-import * as TE from 'fp-ts/TaskEither'
+import * as E from 'fp-ts/Either'
 import * as fs from "fs";
 
-export const getStringFromFile = (path:string) => TE.tryCatch(
-    () => fs.promises.readFile(path, {encoding: 'utf8' }),
-    (reason) => new Error(`${reason}`),
+export const getContentFromFile = (path:string) => E.tryCatch(
+    async () => await fs.promises.readFile(path, {encoding: 'utf8' }),
+    (reason) => new Error(`Error getting file: ${reason}`),
 )
