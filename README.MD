@@ -17,7 +17,7 @@ Nella sezione sotto puoi vedere un esempio di file di input e di uno di output.
 Le regole da implementare sono le seguenti:
 - il rover si muove su una griglia;
 - il rover parte dalla posizione 0,0,N dove:
-  - 0,0 sono delle coordinate X,Y sulla griglia;
+  - 0, 0 sono delle coordinate X, Y sulla griglia;
   - N è la direzione verso cui è rivolto il rover. Le direzioni possibili sono quattro:
 N (North), E (East) S (South) e W (West);
 - al rover può essere passata una stringa di comandi, dove ogni comando è

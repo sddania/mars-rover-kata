@@ -6,8 +6,10 @@ export enum Direction {
 }
 
 export type Rover = {
-    position: Coordinates & { direction: Direction },
-    hitted: boolean
+    position: Position,
+    beatenObstacle: boolean
 }
+
+export type Position = Coordinates & { direction: Direction };
 
 export type Coordinates = { x: number, y: number }

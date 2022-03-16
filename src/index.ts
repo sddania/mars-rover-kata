@@ -1,13 +1,6 @@
 // /** @since 0.0.0 */
-//
-// import {pipe} from 'fp-ts/function'
-// import {getContentFromFile, getStringFromFile} from "./services/get-string-form-file";
-// import {stringToArrayFromReturnCodec} from "./services/file-parser";
-// import {either as E} from "fp-ts";
-// import {taskEither as TE} from "fp-ts";
-// import {task as T} from "fp-ts";
-// import {Either} from "fp-ts/lib/Either";
-// import {FileRequest} from "./models/file-request";
+
+import {pipe} from 'fp-ts/function'
 
 // -----------------------------------------------------------------------------
 // greetings
