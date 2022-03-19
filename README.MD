@@ -41,3 +41,11 @@ lettera che rappresenta la direzione verso cui è diretto il rover.
 
 La `O:` iniziale viene stampata solo nel caso in cui l’ultimo comando abbia fatto sbattere il rover contro un
 ostacolo. Ad esempio: `1:1:N` oppure `O:2:5:S`.
+
+## Installazione
+
+Lanciare il comando:
+
+`npm install -g .`
+
+E lanciare il comando `mars-rover-kata`

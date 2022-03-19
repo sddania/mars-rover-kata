@@ -22,15 +22,17 @@ const getCommandPromise: (command: string) => (Promise<Command>) = (command: str
     }
 }
 
-export const parseCommands: (command: string) => TaskEither<Error, Command> = (command: string) =>
-    TE.tryCatch(
-        () => getCommandPromise(command),
-        e => Error(e as string)
-    )
+export const parseCommand: (command: string) => TaskEither<Error, Command> =
+    (command: string) =>
+        TE.tryCatch(
+            () => getCommandPromise(command),
+            e => Error(e as string)
+        )
 
-export const parseCommandsAsync: (commands: string) => Task<ReadonlyArray<Either<Error, Command>>> = (commands: string) =>
-    pipe(
-        commands.split(""),
-        map(parseCommands),
-        T.sequenceArray,
-    )
+export const parseCommandsAsync: (commandsAsString: string) => Task<ReadonlyArray<Either<Error, Command>>> =
+    (commandsAsString: string) =>
+        pipe(
+            commandsAsString.split(""),
+            map(parseCommand),
+            T.sequenceArray,
+        )

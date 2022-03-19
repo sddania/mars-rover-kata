@@ -1,8 +1,8 @@
-import * as E from "fp-ts/Either"
+import * as TE from "fp-ts/TaskEither"
 
-export const parseFileContentAsArray: (content: string) => E.Either<Error, string[]> =
+export const parseFileContentAsArray: (content: string) => TE.TaskEither<Error, string[]> =
     (content: string) =>
-        E.tryCatch(
-            () => content.split(/\r?\n/),
+        TE.tryCatch(
+            () => Promise.resolve(content.split(/\r?\n/)),
             _ => Error("Malformed File")
         )
