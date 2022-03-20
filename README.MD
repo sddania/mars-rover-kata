@@ -44,8 +44,9 @@ ostacolo. Ad esempio: `1:1:N` oppure `O:2:5:S`.
 
 ## Installazione e utilizzo
 
-Lanciare il comando:
+Lanciare il comandi:
 
+`yarn install`
 `npm install -g .`
 
 E lanciare il comando `mars-rover-kata --path <absolute-file-path>` dove `<absolute-file-path>` è il percorso assoluto de file da processare.
