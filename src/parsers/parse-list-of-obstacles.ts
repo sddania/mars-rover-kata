@@ -1,25 +1,26 @@
-import {Obstacle} from "../models/mars";
-import {Task} from "fp-ts/Task";
-import {Either} from "fp-ts/Either";
-import {pipe} from "fp-ts/function";
+import { GridSize, Obstacle } from "../models/mars";
+import { pipe } from "fp-ts/function";
 import * as Array from "fp-ts/Array";
-import * as TE from "fp-ts/TaskEither";
-import * as T from "fp-ts/Task";
-import {getRowWithNameAndCoordinates} from "./parse-list-of-commands";
+import * as E from "fp-ts/Either";
+import { parseRowWithNameAndCoordinates } from "./parse-row-with-name-and-coordinates";
 
 
-const getObstacleAsync = (val: string): Promise<Obstacle> =>
-    Promise.resolve(
-        getRowWithNameAndCoordinates("obstacles", val)
-    )
+const getObstacle = (gridSize: GridSize) => (val: string): Obstacle => {
+  const obstacle = parseRowWithNameAndCoordinates("obstacle", val);
+  if (obstacle.y >= gridSize.y || obstacle.x >= gridSize.x) {
+    throw new Error(`The obstacle { x: ${obstacle.x}, y: ${obstacle.y} } must be into the grid`)
+  }
+  return obstacle;
+};
+const getObstacles = (gridSize: GridSize) => (val: string[]): E.Either<Error, Obstacle[]> => E.tryCatch<Error, Obstacle[]>(
+  () => val.map(getObstacle(gridSize)),
+  e => Error(`Cannot parse "${e}"`)
+);
 
-export const parseListOfObstacles: (parsedFile: string[]) => Task<ReadonlyArray<Either<Error, Obstacle>>> = (parsedFile: string[]) =>
-    pipe(
-        parsedFile,
-        Array.filter(s => s.toLocaleLowerCase().startsWith("obstacles")),
-        Array.map(s => TE.tryCatch<Error, Obstacle>(
-            () => getObstacleAsync(s),
-            () => Error(`Cannot parse "${s}"`)
-        )),
-        T.sequenceArray
-    )
+
+export const parseListOfObstacles = (parsedFile: string[], gridSize: GridSize) =>
+  pipe(
+    parsedFile,
+    Array.filter(s => s.toLocaleLowerCase().startsWith("obstacle")),
+    getObstacles(gridSize)
+  );

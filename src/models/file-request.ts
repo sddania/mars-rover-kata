@@ -3,5 +3,5 @@ import {Commands} from "./command";
 
 export type FileRequest = {
     mars: Mars,
-    commands: Commands
+    commands: Commands[]
 }
