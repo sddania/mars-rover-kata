@@ -17,7 +17,7 @@ Nella sezione sotto puoi vedere un esempio di file di input e di uno di output.
 Le regole da implementare sono le seguenti:
 - il rover si muove su una griglia;
 - il rover parte dalla posizione 0,0,N dove:
-  - 0,0 sono delle coordinate X,Y sulla griglia;
+  - 0, 0 sono delle coordinate X, Y sulla griglia;
   - N è la direzione verso cui è rivolto il rover. Le direzioni possibili sono quattro:
 N (North), E (East) S (South) e W (West);
 - al rover può essere passata una stringa di comandi, dove ogni comando è
@@ -41,3 +41,13 @@ lettera che rappresenta la direzione verso cui è diretto il rover.
 
 La `O:` iniziale viene stampata solo nel caso in cui l’ultimo comando abbia fatto sbattere il rover contro un
 ostacolo. Ad esempio: `1:1:N` oppure `O:2:5:S`.
+
+## Installazione e utilizzo
+
+Lanciare il comando:
+
+`npm install -g .`
+
+E lanciare il comando `mars-rover-kata --path <absolute-file-path>` dove `<absolute-file-path>` è il percorso assoluto de file da processare.
+
+Il risultato verrà stampato a video.

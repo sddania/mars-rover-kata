@@ -1,5 +1,6 @@
-node_modules/
-dist/
+node_modules
+dist
+coverage
 yarn-error.log
 docs/modules/*.ts.md
 docs/_site
