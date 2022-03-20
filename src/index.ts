@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import yargs from 'yargs/yargs';
-import { parse } from './parsers/parse';
+import { executor } from "./services/executor";
 
 const parser = yargs(process.argv.slice(2)).options({
   path: { type: 'string', demand: true }
@@ -8,6 +8,15 @@ const parser = yargs(process.argv.slice(2)).options({
 
 (async() => {
   const argv = await parser.argv;
-  const parsed = parse(argv.path)
-  console.log(parsed)
+  const results = executor(argv.path)
+  // todo: manage side effects
+  switch (results._tag) {
+    case "Left":
+      console.error(results.left)
+      break;
+    case "Right":
+      // todo manage side effects
+      const arrayResultToPrint = results.right
+      arrayResultToPrint.forEach(r => console.log(r))
+  }
 })();

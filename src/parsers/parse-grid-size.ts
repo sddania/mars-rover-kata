@@ -16,7 +16,7 @@ export const parseGridSize = (parsedFile: string[]) =>
   pipe(
     parsedFile,
     Array.findFirst(s => s.toLocaleLowerCase().startsWith("size")),
-    E.fromOption(() => Error("Cannot find size Row")),
+    E.fromOption(() => Error("Cannot find size row")),
     E.map(row =>
       E.tryCatch(
         () => getGridSize(row),

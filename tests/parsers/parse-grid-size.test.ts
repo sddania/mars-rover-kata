@@ -29,3 +29,18 @@ test("when we have more size row", () => {
   expect(parseGridSize(["Size 1 1", row2])).toStrictEqual(E.right({ x: 1, y: 1 }))
 });
 
+test("when x size is negative", () => {
+  const row = "Size -1 1";
+  const e = "Error: The grid size must have horizontal and vertical length major of 1"
+  expect(parseGridSize([row])).toStrictEqual(E.left(Error(`Cannot parse "${row}": ${e}`)))
+});
+
+test("when y size is negative", () => {
+  const row = "Size 1 -1";
+  const e = "Error: The grid size must have horizontal and vertical length major of 1"
+  expect(parseGridSize([row])).toStrictEqual(E.left(Error(`Cannot parse "${row}": ${e}`)))
+});
+
+test("when cannot find size row", () => {
+  expect(parseGridSize([])).toStrictEqual(E.left(Error(`Cannot find size row`)))
+});
