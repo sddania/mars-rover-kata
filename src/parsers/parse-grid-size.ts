@@ -12,7 +12,7 @@ const getGridSize = (val: string): GridSize => {
   return gridSize;
 };
 
-export const parseGridSize = (parsedFile: string[]) =>
+export const parseGridSize: (parsedFile: string[]) => E.Either<Error, GridSize> = (parsedFile: string[]) =>
   pipe(
     parsedFile,
     Array.findFirst(s => s.toLocaleLowerCase().startsWith("size")),

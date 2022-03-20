@@ -8,7 +8,7 @@ import * as O from "fp-ts/Option";
 import * as A from "fp-ts/Array";
 
 function reduceCommands(mars: Mars, commands: Command[], rover: Rover) {
-  let marsReduceCommand = reduceCommand(mars.gridSize);
+  const marsReduceCommand = reduceCommand(mars.gridSize);
   const cloned: Rover = {
     ...rover,
     position: { ...rover.position }
@@ -71,7 +71,7 @@ function getDirection(d: Direction): string {
 }
 
 export const ejectCommandResult = (r: Rover): string => {
-  let stringResult = `${r.position.x}:${r.position.y}:${getDirection(r.position.direction)}`;
+  const stringResult = `${r.position.x}:${r.position.y}:${getDirection(r.position.direction)}`;
   return r.beatenObstacle ?
     `O:${stringResult}` :
     stringResult;

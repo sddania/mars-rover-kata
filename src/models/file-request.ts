@@ -1,7 +1,7 @@
-import {Mars} from "./mars";
-import {Commands} from "./command";
+import { Mars } from "./mars";
+import { Commands } from "./command";
 
 export type FileRequest = {
-    mars: Mars,
-    commands: Commands[]
+  mars: Mars,
+  commands: Commands[]
 }

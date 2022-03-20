@@ -1,6 +1,6 @@
 import { parseRowWithNameAndCoordinates } from "../../src/parsers/parse-row-with-name-and-coordinates";
 
-const sut = parseRowWithNameAndCoordinates
+const sut = parseRowWithNameAndCoordinates;
 
 test("when row is malformed on first element", () => {
   const row = "Testsssss 1 1";

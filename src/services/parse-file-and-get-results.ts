@@ -3,7 +3,7 @@ import { parse } from "../parsers/parse";
 import { reduceFileRequest } from "./move-rover";
 import * as E from "fp-ts/Either";
 
-export const executor = (path: string) =>
+export const parseFileAndGetResults: (path: string) => E.Either<Error, ReadonlyArray<string>> = (path: string) =>
   pipe(
     path,
     parse,

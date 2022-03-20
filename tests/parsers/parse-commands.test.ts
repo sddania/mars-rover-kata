@@ -4,7 +4,7 @@ import { Command, Commands } from "../../src/models/command";
 
 test("test given examples", async () => {
   const result = parseCommands("LFRBFLFFFLL");
-  const actual = result.map(e => getOrElse<Error, Command>(_ => fail())(e));
+  const actual = result.map(e => getOrElse<Error, Command>(() => fail())(e));
   expect(actual.length).toEqual(11);
   expect(actual).toStrictEqual<Commands>([
     Command.Left,

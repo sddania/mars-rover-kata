@@ -1,7 +1,7 @@
 import { moveRover } from "../../src/services/move-rover";
 import { Command } from "../../src/models/command";
 import { Direction, Rover } from "../../src/models/rover";
-import * as O from "fp-ts/Option"
+import * as O from "fp-ts/Option";
 
 test("reduce a string of command", () => {
   const mars = {
@@ -58,7 +58,7 @@ test("reduce example 1", () => {
 function secondExampleResult() {
   return {
     position: {
-        x: 1, y: 3, direction: Direction.South
+      x: 1, y: 3, direction: Direction.South
     },
     beatenObstacle: false
   };
@@ -86,7 +86,7 @@ test("reduce example 3", () => {
     ],
     gridSize: { x: 5, y: 4 }
   };
-  const commands=[
+  const commands = [
     Command.Left,
     Command.Foreword,
     Command.Right,
@@ -97,7 +97,7 @@ test("reduce example 3", () => {
     Command.Foreword,
     Command.Foreword,
     Command.Left,
-    Command.Left]
+    Command.Left];
   const actual = moveRover(mars, commands, O.of(secondExampleResult()));
   expect(actual).toStrictEqual<Rover>({
     position: {

@@ -1,10 +1,10 @@
-import { executor } from "../../src/services/executor";
+import { parseFileAndGetResults } from "../../src/services/parse-file-and-get-results";
 import path from "path";
 
 const relativePath = path.join(__dirname, "..", "example-file", "input");
 
 test("test execution example in file", async () => {
-  const results = executor(relativePath);
+  const results = parseFileAndGetResults(relativePath);
   if (results._tag === "Right") {
     expect(results.right).toStrictEqual([
       "O:1:0:E",
