@@ -8,7 +8,7 @@ import * as IO from "fp-ts/IO";
 import * as A from "fp-ts/Array";
 
 const parser = yargs(process.argv.slice(2)).options({
-  path: { type: "string", demand: true }
+  path: { type: "string", demand: true, desc: "Identifica il file da processare" }
 });
 
 (async () => {
@@ -18,7 +18,7 @@ const parser = yargs(process.argv.slice(2)).options({
     parseFileAndGetResults,
     E.fold(
       Console.error,
-      r => IO.of(A.map(Console.info)([...r]))
+      r => IO.of(A.map(console.info)([...r]))
     ))
 
   printResults()
