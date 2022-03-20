@@ -1,12 +1,13 @@
-#! /usr/bin/env node
-import * as yargs from "yargs";
+#!/usr/bin/env node
+import yargs from 'yargs/yargs';
+import { parse } from './parsers/parse';
 
-const usage = "\nUsage: rover-mars-kata --file <path-to-file> to process file and execute commands";
-const test = yargs.option("f", {
-  alias: "file",
-  describe: "get the file to process",
-  type: "string",
-  nargs: 1,
-  demand: true
-}).help(true).usage(usage).argv;
+const parser = yargs(process.argv.slice(2)).options({
+  path: { type: 'string', demand: true }
+});
 
+(async() => {
+  const argv = await parser.argv;
+  const parsed = parse(argv.path)
+  console.log(parsed)
+})();

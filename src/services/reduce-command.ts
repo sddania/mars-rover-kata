@@ -29,4 +29,5 @@ export const reduceCommand = (gridSize: GridSize) => (position: Position, comman
         case Command.Left:
             return turnRover(position, -1)
     }
+    return position;
 }
