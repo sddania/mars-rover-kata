@@ -33,6 +33,36 @@ test("reduce a complex string of command", () => {
   });
 });
 
+test("make a 360° turn", () => {
+  const mars = {
+    obstacles: [],
+    gridSize: { x: 3, y: 3 }
+  };
+  const commands = [Command.Left, Command.Left, Command.Left, Command.Left];
+  const actual = moveRover(mars, commands, O.none);
+  expect(actual).toStrictEqual<Rover>({
+    position: {
+      x: 0, y: 0, direction: Direction.North
+    },
+    beatenObstacle: false
+  });
+});
+
+test("when an obstacle is on start position", () => {
+  const mars = {
+    obstacles: [{x:0,y:0}],
+    gridSize: { x: 3, y: 3 }
+  };
+  const commands = [Command.Left];
+  const actual = moveRover(mars, commands, O.none);
+  expect(actual).toStrictEqual<Rover>({
+    position: {
+      x: 0, y: 0, direction: Direction.North
+    },
+    beatenObstacle: true
+  });
+});
+
 function firstExampleResult() {
   return {
     position: {

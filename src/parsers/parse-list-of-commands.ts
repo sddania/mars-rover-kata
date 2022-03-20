@@ -9,7 +9,9 @@ export const parseListOfCommands: (parsedFile: string[]) => E.Either<Error, E.Ei
       if (index === -1) {
         throw new Error("Cannot find \"Commands\" row");
       }
-      return parsedFile.slice(index + 1, parsedFile.length - 1).map(parseCommands);
+      return parsedFile.slice(index + 1, parsedFile.length)
+        .filter(s => s != null && s.trim() !== "")
+        .map(parseCommands);
     },
-    e => Error(e as string)
+    e => e as Error
   );
