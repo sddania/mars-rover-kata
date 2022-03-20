@@ -3,7 +3,7 @@ import { Coordinates } from "../models/rover";
 
 export const parseRowWithNameAndCoordinates = (prefix: string, s: string): Coordinates => {
   const words = s.split(" ");
-  if (words.length === 3) {
+  if (words.length !== 3) {
     throw new Error("The row must have 3 words");
   }
   const firstRow = A.head(words);
