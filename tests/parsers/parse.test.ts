@@ -1,22 +1,22 @@
 import path from "path";
 import { parse } from "../../src/parsers/parse";
-import { Command, Commands } from "../../src/models/command";
+import { Command, RowCommands } from "../../src/models/command";
 import * as E from "fp-ts/Either";
 
 const relativePath = path.join(__dirname, "..", "example-file", "input");
 
 test("parse the example input file", () => {
   const actual = parse(relativePath);
-  const command1: Commands = [
+  const command1: RowCommands = [
     Command.Right,
     Command.Foreword,
     Command.Foreword
   ];
-  const command2: Commands = [
+  const command2: RowCommands = [
     Command.Right,
     Command.Foreword
   ];
-  const command3: Commands = [
+  const command3: RowCommands = [
     Command.Left,
     Command.Foreword,
     Command.Right,

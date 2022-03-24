@@ -5,7 +5,6 @@ import { parseFileContentAsArray } from "./parse-file-content-as-array";
 import { parseGridSize } from "./parse-grid-size";
 import { parseListOfObstacles } from "./parse-list-of-obstacles";
 import { parseListOfCommands } from "./parse-list-of-commands";
-import { Command } from "../models/command";
 import { FileRequest } from "../models/file-request";
 
 export const parse: (path: string) => E.Either<Error, FileRequest> = (path: string) => pipe(
@@ -20,6 +19,6 @@ export const parse: (path: string) => E.Either<Error, FileRequest> = (path: stri
       gridSize: a.gridSize,
       obstacles: a.obstacles
     },
-    commands: a.commands.map(cs => cs.map(c => E.getOrElse(() => Command.Error)(c)))
+    commands: a.commands
   }))
 );

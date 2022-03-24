@@ -1,8 +1,8 @@
 import * as E from "fp-ts/Either";
-import { Command } from "../models/command";
 import { parseCommands } from "./parse-command";
+import { RowCommands } from "../models/command";
 
-export const parseListOfCommands: (parsedFile: string[]) => E.Either<Error, E.Either<Error, Command>[][]> = (parsedFile: string[]) =>
+export const parseListOfCommands: (parsedFile: string[]) => E.Either<Error, RowCommands[]> = (parsedFile: string[]) =>
   E.tryCatch(
     () => {
       const index = parsedFile.findIndex(r => r.toLocaleLowerCase() === "commands");

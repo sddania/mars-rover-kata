@@ -1,5 +1,5 @@
 import { Mars } from "../models/mars";
-import { Command, Commands } from "../models/command";
+import { Command, RowCommands } from "../models/command";
 import { Direction, Rover } from "../models/rover";
 import { reduceCommand } from "./reduce-command";
 import { FileRequest } from "../models/file-request";
@@ -34,7 +34,7 @@ const getDefaultRover = (mars: Mars): Lazy<Rover> => {
   });
 };
 
-export const moveRover = (mars: Mars, commands: Commands, rover: O.Option<Rover>): Rover =>
+export const moveRover = (mars: Mars, commands: RowCommands, rover: O.Option<Rover>): Rover =>
   reduceCommands(
     mars,
     commands,
