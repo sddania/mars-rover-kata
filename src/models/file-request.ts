@@ -1,7 +1,7 @@
 import { Mars } from "./mars";
-import { Commands } from "./command";
+import { RowCommands } from "./command";
 
 export type FileRequest = {
   mars: Mars,
-  commands: Commands[]
+  commands: RowCommands[]
 }

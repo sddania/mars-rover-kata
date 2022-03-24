@@ -1,12 +1,10 @@
 import { parseCommands } from "../../src/parsers/parse-command";
-import { getOrElse, isLeft } from "fp-ts/Either";
-import { Command, Commands } from "../../src/models/command";
+import { Command, RowCommands } from "../../src/models/command";
 
 test("test given examples", async () => {
-  const result = parseCommands("LFRBFLFFFLL");
-  const actual = result.map(e => getOrElse<Error, Command>(() => fail())(e));
+  const actual = parseCommands("LFRBFLFFFLL");
   expect(actual.length).toEqual(11);
-  expect(actual).toStrictEqual<Commands>([
+  expect(actual).toStrictEqual<RowCommands>([
     Command.Left,
     Command.Foreword,
     Command.Right,
@@ -22,8 +20,6 @@ test("test given examples", async () => {
 });
 
 test("test with error", () => {
-  const result = parseCommands("LFRBFLPIPPOFFFLL");
-  // noinspection DuplicatedCode
-  const actual = result.map((e, index) => isLeft(e) ? index : -1).filter(i => i > -1);
-  expect(actual).toStrictEqual([6, 7, 8, 9, 10]);
+  expect(() => parseCommands("LFRBFLPIPPOFFFLL"))
+    .toThrow("Cannot parse this command \"P\"");
 });

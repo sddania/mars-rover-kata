@@ -1,7 +1,6 @@
-import { Command } from "../models/command";
+import { Command, RowCommands } from "../models/command";
 import { pipe } from "fp-ts/lib/function";
-import { map } from "fp-ts/Array";
-import { Either, tryCatch } from "fp-ts/Either";
+import * as A  from "fp-ts/Array";
 
 const getCommand: (command: string) => (Command) = (command: string) => {
   switch (command) {
@@ -18,16 +17,9 @@ const getCommand: (command: string) => (Command) = (command: string) => {
   }
 };
 
-export const parseCommand: (command: string) => Either<Error, Command> =
-  (command: string) =>
-    tryCatch(
-      () => getCommand(command),
-      e => Error(e as string)
-    );
-
-export const parseCommands: (commandsAsString: string) => Either<Error, Command>[] =
+export const parseCommands: (commandsAsString: string) => RowCommands =
   (commandsAsString: string) =>
     pipe(
       commandsAsString.split(""),
-      map(parseCommand)
-    );
+      A.map(getCommand)
+    )
