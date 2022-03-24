@@ -4,6 +4,8 @@ on:
     branches:
       - master
       - develop
+      - hotfix/*
+      - release/*
   pull_request:
     branches:
       - master

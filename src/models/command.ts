@@ -6,4 +6,4 @@ export enum Command {
   Error = "Error",
 }
 
-export type Commands = Command[];
+export type RowCommands = Command[];
