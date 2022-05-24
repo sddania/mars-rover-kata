@@ -13,7 +13,7 @@ const getCommand: (command: string) => (Command) = (command: string) => {
     case "B":
       return Command.Backward;
     default:
-      throw new Error(`BAD COmmand "${command}"`);
+      throw new Error(`jkasdhksdjdsakj "${command}"`);
   }
 };
 
